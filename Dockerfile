@@ -1,4 +1,6 @@
-FROM node:10.13 AS dev
+FROM node:10.14-alpine AS dev
+
+RUN npm install pm2 -g
 
 RUN mkdir -p /home/node-app
 
@@ -6,7 +8,8 @@ RUN mkdir -p /home/node-app
 WORKDIR /home/node-app
 
 EXPOSE 3001
-CMD [ "npm", "start" ]
+#CMD [ "npm", "start" ]
+CMD [ "pm2-runtime", "app.js" ]
 
 
 
