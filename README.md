@@ -6,8 +6,12 @@ https://github.com/docker/cli/issues/1134
 #建立image, 只到 dev 的步驟
 docker build -t koa-test1:v1 --target=dev  .
 
+#建立image
+docker build -t koa-test1:v1 .
+
 #run image and use host volume with name( sometimes has problem use same name)
 docker run -d -p 3001:3001 --name koa -v /Users/i_jhuhuchen/temp/koa:/home/node-app koa-test1:v1
+
 
 #run image and use host volume
 docker run -d -p 3001:3001 -v /Users/i_jhuhuchen/temp/koa:/home/node-app koa-test1:v1
@@ -16,6 +20,13 @@ docker run -d -p 3001:3001 -v /Users/i_jhuhuchen/temp/koa:/home/node-app koa-tes
 docker exec -it 69d1 bash
 
 
+# list all container include stopped, pause
+docker ps -a
+
+# Delete all containers
+docker rm $(docker ps -a -q)
+# Delete all images
+docker rmi $(docker images -q)
 
 # pm2 command
 $ docker exec -it <container-id> pm2 monit	Monitoring CPU/Usage of each process
